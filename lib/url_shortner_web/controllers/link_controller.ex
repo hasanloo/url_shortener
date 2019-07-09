@@ -40,7 +40,7 @@ defmodule UrlShortenerWeb.LinkController do
   def redirect_url(conn, %{"short_code" => short_code}) do
     with {:ok, %Link{} = link} <- Links.get_link_by_short_code(short_code) do
       conn
-      |> redirect(external: link.url)
+      |> redirect(external: get_redirect_url(link.url, conn.query_string))
     end
   end
 
@@ -55,5 +55,26 @@ defmodule UrlShortenerWeb.LinkController do
     hash
     |> Base.encode64()
     |> binary_part(0, 8)
+  end
+
+  defp get_redirect_url(url, "") do
+    url
+  end
+
+  defp get_redirect_url(url, query_string) do
+    url
+    |> URI.parse()
+    |> merge_query_strings(query_string)
+    |> URI.to_string()
+  end
+
+  defp merge_query_strings(%{query: query} = uri, query_string) when is_binary(query) do
+    uri
+    |> Map.update(:query, "", &(&1 <> "&" <> query_string))
+  end
+
+  defp merge_query_strings(uri, query_string) do
+    uri
+    |> Map.update(:query, "", fn _qs -> query_string end)
   end
 end

@@ -5,7 +5,9 @@ defmodule UrlShortenerWeb.LinkViewTest do
   import Phoenix.View
 
   test "renders show.json" do
-    assert render(UrlShortenerWeb.LinkView, "show.json", %{link: "http://localhost:4002/r/RmPOZWLu"}) ==
+    assert render(UrlShortenerWeb.LinkView, "show.json", %{
+             link: "http://localhost:4002/r/RmPOZWLu"
+           }) ==
              %{link: "http://localhost:4002/r/RmPOZWLu"}
   end
 end

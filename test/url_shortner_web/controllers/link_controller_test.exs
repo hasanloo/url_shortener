@@ -4,6 +4,7 @@ defmodule UrlShortenerWeb.LinkControllerTest do
   alias UrlShortener.Links
 
   @valid_attrs %{url: "http://example.com/about/index.html?uid=12345", short_code: "RmPOZWLu"}
+  @valid_attrs_noparam %{url: "http://example.com/about/index.html", short_code: "RmPOZWLu"}
 
   describe "create/2" do
     test "Creates, and responds with a newly created shortened link if attributes are valid", %{
@@ -46,6 +47,43 @@ defmodule UrlShortenerWeb.LinkControllerTest do
       conn = get(conn, Routes.link_path(conn, :redirect_url, @valid_attrs.short_code))
 
       assert redirected_to(conn) =~ @valid_attrs.url
+    end
+
+    test "Redirect to actual url if it can find by the short_code and there is no param in the actual url",
+         %{
+           conn: conn
+         } do
+      Links.create_link(@valid_attrs_noparam)
+
+      conn = get(conn, Routes.link_path(conn, :redirect_url, @valid_attrs_noparam.short_code))
+
+      assert redirected_to(conn) =~ @valid_attrs_noparam.url
+    end
+
+    test "Redirect to actual url if it can find by the short_code with additional params", %{
+      conn: conn
+    } do
+      Links.create_link(@valid_attrs)
+
+      conn =
+        get(conn, Routes.link_path(conn, :redirect_url, @valid_attrs.short_code, param: "test"))
+
+      assert redirected_to(conn) =~ @valid_attrs.url <> "&" <> "param=test"
+    end
+
+    test "Redirect to actual url if it can find by the short_code with additional params(actual url without param)",
+         %{
+           conn: conn
+         } do
+      Links.create_link(@valid_attrs_noparam)
+
+      conn =
+        get(
+          conn,
+          Routes.link_path(conn, :redirect_url, @valid_attrs_noparam.short_code, param: "test")
+        )
+
+      assert redirected_to(conn) =~ @valid_attrs_noparam.url <> "?" <> "param=test"
     end
 
     test "Returns an error when can not find the url by short_code", %{
