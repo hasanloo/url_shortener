@@ -1,9 +1,5 @@
-defmodule EshortnerWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :eshortner
-
-  socket "/socket", EshortnerWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+defmodule UrlShortenerWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :url_shortner
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -11,7 +7,7 @@ defmodule EshortnerWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :eshortner,
+    from: :url_shortner,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -39,8 +35,8 @@ defmodule EshortnerWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_eshortner_key",
+    key: "_url_shortner_key",
     signing_salt: "XGkSe4vl"
 
-  plug EshortnerWeb.Router
+  plug UrlShortenerWeb.Router
 end

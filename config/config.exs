@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :eshortner,
-  ecto_repos: [Eshortner.Repo]
+config :url_shortner,
+  ecto_repos: [UrlShortener.Repo]
 
 # Configures the endpoint
-config :eshortner, EshortnerWeb.Endpoint,
+config :url_shortner, UrlShortenerWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "Aah6AXiOIhZPh4yO3fY5S64RNs3jMRUKyl7Sr1mw0+V2+gOoKZGi8+01fP50pJIO",
-  render_errors: [view: EshortnerWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Eshortner.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: UrlShortenerWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: UrlShortener.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

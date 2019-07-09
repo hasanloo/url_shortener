@@ -1,2 +1,4 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Eshortner.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(UrlShortener.Repo, :manual)
+
+{:ok, _} = Application.ensure_all_started(:ex_machina)

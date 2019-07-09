@@ -1,9 +1,9 @@
-defmodule Eshortner.MixProject do
+defmodule UrlShortener.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :eshortner,
+      app: :url_shortner,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -11,8 +11,17 @@ defmodule Eshortner.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
+      dialyzer: [
+        plt_add_deps: :transitive,
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+      ],
       test_coverage: [tool: ExCoveralls],
-      dialyzer: [plt_add_deps: :transitive]
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -21,7 +30,7 @@ defmodule Eshortner.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Eshortner.Application, []},
+      mod: {UrlShortener.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -37,6 +46,7 @@ defmodule Eshortner.MixProject do
     [
       {:phoenix, "~> 1.4.7"},
       {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_html, "~> 2.11"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
@@ -49,7 +59,7 @@ defmodule Eshortner.MixProject do
       {:credo, "~> 0.8.5", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.0", only: :test},
       {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false},
-      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]},
+      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
     ]
   end
 

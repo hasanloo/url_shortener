@@ -20,13 +20,16 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-eshortner-*.tar
+url_shortner-*.tar
 
 # Since we are building assets from assets/,
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
 /priv/static/
 
+# dialyxir plt files
+/priv/plts/*.plt
+/priv/plts/*.plt.hash
 
 # vim temp files
 *.swp

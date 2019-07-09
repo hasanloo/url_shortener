@@ -1,6 +1,6 @@
-defmodule Eshortner do
+defmodule UrlShortener do
   @moduledoc """
-  Eshortner keeps the contexts that define your domain
+  UrlShortener keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

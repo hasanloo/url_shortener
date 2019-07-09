@@ -1,12 +1,12 @@
-defmodule EshortnerWeb do
+defmodule UrlShortenerWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use EshortnerWeb, :controller
-      use EshortnerWeb, :view
+      use UrlShortenerWeb, :controller
+      use UrlShortenerWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,26 +19,27 @@ defmodule EshortnerWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: EshortnerWeb
+      use Phoenix.Controller, namespace: UrlShortenerWeb
 
       import Plug.Conn
-      import EshortnerWeb.Gettext
-      alias EshortnerWeb.Router.Helpers, as: Routes
+      import UrlShortenerWeb.Gettext
+      alias UrlShortenerWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/eshortner_web/templates",
-        namespace: EshortnerWeb
+        root: "lib/url_shortner_web/templates",
+        namespace: UrlShortenerWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
+      import Phoenix.Controller,
+        only: [get_flash: 1, get_flash: 2, view_module: 1]
 
-      import EshortnerWeb.ErrorHelpers
-      import EshortnerWeb.Gettext
-      alias EshortnerWeb.Router.Helpers, as: Routes
+      import UrlShortenerWeb.ErrorHelpers
+      import UrlShortenerWeb.Gettext
+      alias UrlShortenerWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -47,13 +48,6 @@ defmodule EshortnerWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
-    end
-  end
-
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import EshortnerWeb.Gettext
     end
   end
 

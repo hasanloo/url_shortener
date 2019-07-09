@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :eshortner, Eshortner.Repo,
+config :url_shortner, UrlShortener.Repo,
   username: "postgres",
   password: "",
-  database: "eshortner_dev",
+  database: "url_shortner_dev",
   hostname: "db",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :eshortner, Eshortner.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :eshortner, EshortnerWeb.Endpoint,
+config :url_shortner, UrlShortenerWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -47,13 +47,13 @@ config :eshortner, EshortnerWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :eshortner, EshortnerWeb.Endpoint,
+config :url_shortner, UrlShortenerWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/eshortner_web/{live,views}/.*(ex)$",
-      ~r"lib/eshortner_web/templates/.*(eex)$"
+      ~r"lib/url_shortner_web/{live,views}/.*(ex)$",
+      ~r"lib/url_shortner_web/templates/.*(eex)$"
     ]
   ]
 
