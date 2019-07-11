@@ -40,9 +40,8 @@ defmodule UrlShortenerWeb.LinkController do
   def redirect_url(conn, %{"short_code" => short_code}) do
     with {:ok, %Link{} = link} <- Links.get_link_by_short_code(short_code) do
       Task.start(fn ->
-        visit =
-          %{link_id: link.id, headers: Enum.into(conn.req_headers, %{})}
-          |> Links.create_visit()
+        %{link_id: link.id, headers: Enum.into(conn.req_headers, %{})}
+        |> Links.create_visit()
       end)
 
       conn

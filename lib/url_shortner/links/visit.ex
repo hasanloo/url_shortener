@@ -14,8 +14,8 @@ defmodule UrlShortener.Links.Visit do
   def changeset(visit, attrs) do
     visit
     |> cast(attrs, [:headers, :link_id])
-    # |> cast_assoc(:link)
-    # |> assoc_constraint(:link)
-    |> validate_required([:headers])
+    |> cast_assoc(:link)
+    |> assoc_constraint(:link)
+    |> validate_required([:headers, :link_id])
   end
 end

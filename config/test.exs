@@ -4,7 +4,7 @@ use Mix.Config
 config :url_shortner, UrlShortener.Repo,
   username: "postgres",
   password: "",
-  database: "url_shortner_test",
+  database: "url_shortener_test",
   hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox
 

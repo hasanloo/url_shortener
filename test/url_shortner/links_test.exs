@@ -3,8 +3,9 @@ defmodule UrlShortener.LinksTest do
 
   alias UrlShortener.Links
 
-  describe "link" do
+  describe "links" do
     alias UrlShortener.Links.Link
+    alias UrlShortener.Links.Visit
 
     @valid_attrs %{url: "http://example.com/about/index.html?uid=123456", short_code: "s5Rs9quW"}
     @valid_attrs_nonexistent %{
@@ -40,6 +41,43 @@ defmodule UrlShortener.LinksTest do
 
     test "create_link/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Links.create_link(@invalid_attrs)
+    end
+  end
+
+  describe "visits" do
+    alias UrlShortener.Links.Visit
+
+    test "create_visit/1 with valid data create a visit for a link" do
+      link = link_fixture()
+
+      assert {:ok, %Visit{} = visit} =
+               Links.create_visit(%{
+                 link_id: link.id,
+                 headers: %{
+                   host: "localhost:4000",
+                   cookie: "MobiotvCookie=true",
+                   connection: "keep-alive"
+                 }
+               })
+
+      assert visit.link_id == link.id
+
+      assert visit.headers == %{
+               host: "localhost:4000",
+               cookie: "MobiotvCookie=true",
+               connection: "keep-alive"
+             }
+    end
+
+    test "create_visit/1 with non exists link data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} =
+               Links.create_visit(%{
+                 headers: %{
+                   host: "localhost:4000",
+                   cookie: "MobiotvCookie=true",
+                   connection: "keep-alive"
+                 }
+               })
     end
   end
 end

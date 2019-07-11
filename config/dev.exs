@@ -4,7 +4,7 @@ use Mix.Config
 config :url_shortner, UrlShortener.Repo,
   username: "postgres",
   password: "",
-  database: "url_shortner_dev",
+  database: "url_shortener_dev",
   hostname: "db",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
