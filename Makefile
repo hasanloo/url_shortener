@@ -22,6 +22,9 @@ logs:
 enter-container:
 	$(COMPOSE) run --rm --no-deps -e USER=test web sh
 
+migrate:
+	$(COMPOSE) run --rm --no-deps -e USER=test web mix ecto.migrate
+
 test:
 	$(COMPOSE) run --rm --no-deps -e USER=test -e MIX_ENV=test web mix test test/
 

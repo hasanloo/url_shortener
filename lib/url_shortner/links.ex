@@ -7,6 +7,7 @@ defmodule UrlShortener.Links do
   alias UrlShortener.Repo
 
   alias UrlShortener.Links.Link
+  alias UrlShortener.Links.Visit
 
   @doc """
   Gets a single link using its short_code.
@@ -44,6 +45,12 @@ defmodule UrlShortener.Links do
   def create_link(attrs \\ %{}) do
     %Link{}
     |> Link.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_visit(attrs \\ %{}) do
+    %Visit{}
+    |> Visit.changeset(attrs)
     |> Repo.insert()
   end
 end

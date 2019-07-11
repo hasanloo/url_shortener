@@ -2,9 +2,11 @@ defmodule UrlShortener.Links.Link do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "link" do
+  schema "links" do
     field :url, :string
     field :short_code, :string
+
+    has_many(:visits, UrlShortener.Links.Visit, foreign_key: :link_id)
 
     timestamps()
   end
