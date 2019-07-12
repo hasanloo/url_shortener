@@ -57,7 +57,6 @@ defmodule UrlShortener.MixProject do
       {:observer_cli, "~> 1.5"},
       {:excoveralls, "~> 0.7", only: [:dev, :test]},
       {:credo, "~> 0.8.5", only: [:dev, :test], runtime: false},
-      {:ex_machina, "~> 2.3", only: :test},
       {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false},
       {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
     ]

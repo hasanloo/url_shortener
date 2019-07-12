@@ -1,19 +1,49 @@
 # UrlShortener
 
-To start your Phoenix server:
+A URL shortener implemented with Elixir and Phoenix framework.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+## Installation
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+To setup this application you need to have `docker` and `docker-compose` installed.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+* Build containers with `docker-compose build`
+* Run containers with `docker-compose up`
 
-## Learn more
+And now you can use the application at `localhost:4000`.
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+## Usage
+
+Available routes:
+
+HTTP method | Route                  | Description
+----------- | ---------------------- | -------------------------
+POST        | /api/link              | Create short code for URL
+GET         | /r/:short_code         | Redirect to url
+
+#### Examples
+
+##### Request
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"url":"http://example.com/about/index.html?uid=123"}' 'http://127.0.0.1:4000/api/link'
+```
+
+##### Response
+```
+200 OK
+{"link":"http://localhost:4000/r/N1B173c1", "status":"success"}
+```
+
+##### Request
+
+```
+curl -X GET 'http://127.0.0.1:4000/r/N1B173c1'
+```
+
+##### Response
+```
+302 Found
+location: http://example.com/about/index.html?uid=123
+```
+
+

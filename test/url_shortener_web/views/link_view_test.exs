@@ -8,6 +8,6 @@ defmodule UrlShortenerWeb.LinkViewTest do
     assert render(UrlShortenerWeb.LinkView, "show.json", %{
              link: "http://localhost:4002/r/RmPOZWLu"
            }) ==
-             %{link: "http://localhost:4002/r/RmPOZWLu"}
+             %{status: "success", link: "http://localhost:4002/r/RmPOZWLu"}
   end
 end
