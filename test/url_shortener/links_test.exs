@@ -4,8 +4,7 @@ defmodule UrlShortener.LinksTest do
   alias UrlShortener.Links
 
   describe "links" do
-    alias UrlShortener.Links.Link
-    alias UrlShortener.Links.Visit
+    alias UrlShortener.Links.{Link, Visit}
 
     @valid_attrs %{url: "http://example.com/about/index.html?uid=123456", short_code: "s5Rs9quW"}
     @valid_attrs_nonexistent %{
