@@ -1,7 +1,7 @@
 defmodule UrlShortenerWeb.LinkController do
   use UrlShortenerWeb, :controller
 
-  alias UrlShortener.Links
+  alias UrlShortener.{Links, Events}
   alias UrlShortener.Links.Link
   alias UrlShortenerWeb.Router.Helpers, as: RouterHelpers
 
@@ -39,10 +39,8 @@ defmodule UrlShortenerWeb.LinkController do
 
   def redirect_url(conn, %{"short_code" => short_code}) do
     with {:ok, %Link{} = link} <- Links.get_link_by_short_code(short_code) do
-      Task.start(fn ->
-        %{link_id: link.id, headers: Enum.into(conn.req_headers, %{})}
-        |> Links.create_visit()
-      end)
+      link
+      |> Events.link_visited(Enum.into(conn.req_headers, %{}))
 
       conn
       |> redirect(external: get_redirect_url(link.url, conn.query_string))
